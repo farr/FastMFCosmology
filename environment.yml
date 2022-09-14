@@ -11,4 +11,9 @@ dependencies:
   - pymc=4
   - scipy
   - seaborn
+  - h5py
+  - ca-certificates
+  - certifi
+  - openssl
+  - tqdm
 prefix: /Users/wfarr/miniconda3/envs/FastMFCosmology
