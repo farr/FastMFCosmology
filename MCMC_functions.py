@@ -13,7 +13,7 @@ from scipy import integrate
 
 
 def P_m(m, alpha=-2.35, mmin=5):
-    '''Converts X~Uniform[0,1] to bounded Power law with slope alpha and min value m_min
+    '''Converts X~Uniform[0,1] to bounded Power law
         m: [0,1] random value to distribute
         alpha: slope of exponential
         mmin: minimum mass value, >0 (needed to prevent diverging at 0)'''    
@@ -22,7 +22,8 @@ def P_m(m, alpha=-2.35, mmin=5):
 
 
 
-def generate_masses(N_samples=int(1E4), f=0.3, m_b=35, sigma=5, alpha=-2.35, mmin=5):
+def generate_masses(N_samples=int(1E4), f=0.3, m_b=35,
+                    sigma=5, alpha=-2.35, mmin=5):
     '''Generate masses based on mass function for black holes.
        Distribution follows power law with gaussian bump
        N_samples: number of points to generate
