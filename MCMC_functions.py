@@ -8,6 +8,7 @@ from astropy import cosmology as cosmo
 from astropy.cosmology import Planck18
 from pylab import *
 import warnings
+from scipy import integrate
 
 
 
@@ -129,3 +130,9 @@ def find_argmax_gridsearch(xs, fxs):
 
     return xmax
 
+
+
+
+def H(z, Ode, Om):
+    epsilon = lambda x: (Om*(1+x)**3 + Ode)**-0.5
+    return (1+z)*integrate.quad(epsilon, 0, z)[0]
