@@ -1,4 +1,4 @@
-'''Auxilliary functions and constants for running the MCMC code'''
+'''Auxilliary functions for running the MCMC code'''
 import numpy as np
 import pymc as pm
 import aesara.tensor as at
@@ -38,10 +38,13 @@ def generate_dLs(N_samples=int(1E4), R=Planck18.luminosity_distance(5)):
 
 def dLs_to_zs(dLs, cosmology=Planck18):
     '''returns array of zs for corresponding dLs'''
-    return np.array([cosmo.z_at_value(Planck18.luminosity_distance, x*u.Mpc).value for x in dLs])
+    return np.array([cosmo.z_at_value(cosmology.luminosity_distance, x*u.Mpc).value for x in dLs])
 
-### Functions for implementing MCMC using PyMC4
-### ...I should really just put them in a module so I don't have to keep copy/pasting...
+
+
+
+
+
 
 def at_interp(x, xs, ys):
     '''Custom linear interpolator'''
@@ -60,9 +63,6 @@ def at_interp(x, xs, ys):
 def Ez(z, Om, w):
     '''Integrand in d_L z relation'''
     z = at.as_tensor(z)
-
-#     w = at.as_tensor(w)
-#     Om = at.as_tensor(Om)
 
     opz = 1 + z
     
