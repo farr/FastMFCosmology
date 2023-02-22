@@ -13,13 +13,24 @@ from scipy import integrate
 
 
 def P_m(m, alpha=-2.35, mmin=5):
-    '''Converts X~Uniform[0,1] to bounded Power law with slope alpha and min value m_min'''    
+    '''Converts X~Uniform[0,1] to bounded Power law with slope alpha and min value m_min
+        m: [0,1] random value to distribute
+        alpha: slope of exponential
+        mmin: minimum mass value, >0 (needed to prevent diverging at 0)'''    
     ma = mmin**alpha
     return (ma + (-ma)*m)**(1/alpha)
 
+
+
 def generate_masses(N_samples=int(1E4), f=0.3, m_b=35, sigma=5, alpha=-2.35, mmin=5):
     '''Generate masses based on mass function for black holes.
-       Distribution follows power law with gaussian bump, tunable with arguments'''
+       Distribution follows power law with gaussian bump
+       N_samples: number of points to generate
+       f: fraction of points that are within the gaussian bump
+       m_b: mean of gaussian bump
+       sigma: std. dev. of gaussian bump
+       alpha: slope of exponential
+       mmin: lower bound of exponential'''
     
     mass_array = np.zeros(N_samples)
     in_bump = np.random.rand(N_samples) < f #pick which distribution each point goes in
@@ -33,12 +44,20 @@ def generate_masses(N_samples=int(1E4), f=0.3, m_b=35, sigma=5, alpha=-2.35, mmi
             mass_array[i] = P_m(np.random.rand(), alpha=alpha, mmin=mmin)
     return mass_array
 
+
+
 def generate_dLs(N_samples=int(1E4), R=Planck18.luminosity_distance(5)):
-    '''Sample from uniform sphere of radius R'''
+    '''Sample from uniform sphere
+       N_samples: number of points to generate
+       R: radius of sphere in which to populate (Mpc)'''
     return np.cbrt(np.random.rand(N_samples))*R.value
 
+
+
 def dLs_to_zs(dLs, cosmology=Planck18):
-    '''returns array of zs for corresponding dLs'''
+    '''returns array of zs for corresponding dLs
+       dLs: luminosity distance points
+       cosmology: model in which to base conversion'''
     return np.array([cosmo.z_at_value(cosmology.luminosity_distance, x*u.Mpc).value for x in dLs])
 
 
