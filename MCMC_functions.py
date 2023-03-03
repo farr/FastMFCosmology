@@ -17,8 +17,8 @@ def P_m(m, alpha=-2.35, mmin=5):
         m: [0,1] random value to distribute
         alpha: slope of exponential
         mmin: minimum mass value, >0 (needed to prevent diverging at 0)'''    
-    ma = mmin**alpha
-    return (ma + (-ma)*m)**(1/alpha)
+    
+    return mmin*(m)**(1/alpha)
 
 
 
