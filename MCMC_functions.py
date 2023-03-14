@@ -47,7 +47,7 @@ def generate_masses(N_samples=int(1E4), f=0.3, m_b=35,
 
 
 
-def generate_dLs(N_samples=int(1E4), R=Planck18.luminosity_distance(5)):
+def generate_dLs(N_samples=int(1E4), R=Planck18.luminosity_distance(3)):
     '''Sample from uniform sphere
        N_samples: number of points to generate
        R: radius of sphere in which to populate (Mpc)'''
@@ -115,7 +115,7 @@ def make_model(ms_obs, sigma_ms_obs, dls, zmin=0, zmax=100):
         om = pm.Deterministic('om', Om*h*h)
         ode = pm.Deterministic('ode', Ode*h*h)
 
-        dH= pm.Deterministic('dH', 2.99792/h)
+        dH= pm.Deterministic('dH', 2997.92/h)
         m0 = pm.Lognormal('m0', mu=log(35), sigma=0.5)
 
         dCinterp = dH*dCs(zinterp, Om, w)
