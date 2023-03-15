@@ -128,8 +128,10 @@ def make_model(ms_obs, sigma_ms_obs, dls, zmin=0, zmax=100):
 
 def find_argmax_gridsearch(xs, fxs, mmin=50):
     '''Custom max finder for arrays'''
-    fxs = fxs[xs >= mmin] ### To kill power law
-    xs  =  xs[xs >= mmin] ### Corresponding xs
+    fxs = fxs[xs >= mmin] # To kill power law
+    xs  =  xs[xs >= mmin] # Corresponding xs
+                          # may want to find more
+                          # justifiable method... 
 
     imax = np.argmax(fxs)
 
