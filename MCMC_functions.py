@@ -126,8 +126,11 @@ def make_model(ms_obs, sigma_ms_obs, dls, zmin=0, zmax=100):
         pm.Normal('m_likelihood', mu=m0*(1+zs), sigma=sigma_ms_obs, observed=ms_obs)
     return model
 
-def find_argmax_gridsearch(xs, fxs):
+def find_argmax_gridsearch(xs, fxs, mmin=50):
     '''Custom max finder for arrays'''
+    fxs = fxs[xs >= mmin] ### To kill power law
+    xs  =  xs[xs >= mmin] ### Corresponding xs
+
     imax = np.argmax(fxs)
 
     if imax == 0 or imax == len(xs)-1:
