@@ -161,3 +161,19 @@ def find_argmax_gridsearch(xs, fxs, mmin=50):
 def H(z, Ode, Om):
     epsilon = lambda x: (Om*(1+x)**3 + Ode)**-0.5
     return (1+z)*integrate.quad(epsilon, 0, z)[0]
+
+
+
+def sigma_m(m_dl, aLIGO=True):
+    '''Produces a log-based error for m1 given a ratio of m/d_L'''
+    if aLIGO:
+        return np.exp(-0.55045*np.log(m_dl) - 3.97547)/3 # aLIGO has ~1/3 the error as before
+    else:
+        return np.exp(-0.55045*np.log(m_dl) - 3.97547)
+
+def sigma_dL(m_dl, aLIGO=True):
+    '''Produces a log-based error for d_L given a ratio of m/d_L'''
+    if aLIGO:
+        return np.exp(-0.1138*np.log(m_dl) - 1.6645)/3 # aLIGO has ~1/3 the error as before
+    else:
+        return np.exp(-0.1138*np.log(m_dl) - 1.6645)
