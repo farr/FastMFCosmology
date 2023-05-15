@@ -167,13 +167,13 @@ def H(z, Ode, Om):
 def sigma_m(m_dl, aLIGO=True):
     '''Produces a log-based error for m1 given a ratio of m/d_L'''
     if aLIGO:
-        return np.exp(-0.55045*np.log(m_dl) - 3.97547)/3 # aLIGO has ~1/3 the error as before
+        return np.exp(-0.2387588*np.log(m_dl) -2.8029856)/3 # aLIGO has ~1/3 the error as before
     else:
-        return np.exp(-0.55045*np.log(m_dl) - 3.97547)
+        return np.exp(-0.2387588*np.log(m_dl) -2.8029856)
 
 def sigma_dL(m_dl, aLIGO=True):
     '''Produces a log-based error for d_L given a ratio of m/d_L'''
     if aLIGO:
-        return np.exp(-0.1138*np.log(m_dl) - 1.6645)/3 # aLIGO has ~1/3 the error as before
+        return np.exp(-0.06718785*np.log(m_dl) -1.51383122)/3 # aLIGO has ~1/3 the error as before
     else:
-        return np.exp(-0.1138*np.log(m_dl) - 1.6645)
+        return np.exp(-0.06718785*np.log(m_dl) -1.51383122)
